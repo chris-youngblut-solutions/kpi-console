@@ -30,7 +30,7 @@ just build      # build release artifact
 just check      # fmt + lint + test (the merge gate)
 ```
 
-Tier-2 release path:
+Tier-2 release path (the release workflow lands at T2 promotion; not present at T1):
 
 ```sh
 just release patch    # tag + push (CI does the build/sign/SBOM/SLSA)

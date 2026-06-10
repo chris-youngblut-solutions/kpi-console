@@ -44,7 +44,8 @@ pre-commit-all:
 # `just release {patch|minor|major}` bumps the version, tags, and pushes.
 # CI takes over from the tag push: builds, signs (cosign), generates SBOM
 # (syft), and (T2 only) generates SLSA provenance. See
-# `.github/workflows/release.yml` for the orchestration.
+# `.github/workflows/release.yml` for the orchestration. That workflow is added
+# at T2 promotion (/shipit tier2 layer) — at T1 the tag pushes but nothing builds.
 
 release bump:
     @bash -euo pipefail -c '\
