@@ -1,0 +1,10 @@
+{
+  "name": "KPI console",
+  "short_name": "KPI",
+  "description": "Governed warehouse metrics over MCP",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f2f5f9",
+  "theme_color": "#1f5eff",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

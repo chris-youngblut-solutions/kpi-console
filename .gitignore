@@ -1,0 +1,94 @@
+node_modules
+
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+# OS
+.DS_Store
+Thumbs.db
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+# --- Universal floor: applies to every repo ---
+# Editor / IDE
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.shared.json
+.idea/
+*.swp
+*.swo
+*~
+desktop.ini
+# OS / shell crud
+.fseventsd/
+.Spotlight-V100/
+.Trashes/
+ehthumbs.db
+$RECYCLE.BIN/
+# Direnv / env
+.envrc.local
+.env.local
+.env.*.local
+# Claude Code per-user
+.claude/settings.local.json
+.claude/sessions/
+.claude/cache/
+.claude/file-history/
+CLAUDE.local.md
+# Logs / coverage / temp
+*.log
+*.log.*
+logs/
+coverage/
+.coverage
+.coverage.*
+htmlcov/
+.tmp/
+tmp/
+.cache/
+# Build outputs (per-language overlays add specifics)
+dist/
+build/
+out/
+# Secrets shapes (defense in depth — gitleaks is the real backstop)
+*.pem
+*.key
+!**/test-fixtures/**/*.pem
+!**/test-fixtures/**/*.key
+*.p12
+*.pfx
+*.kdbx
+secrets/
+.secrets/
+# TypeScript / Node / pnpm
+node_modules/
+.pnpm-store/
+.pnpm-debug.log
+.npm
+.yarn/
+# Build artifacts
+*.tsbuildinfo
+.tsc-cache/
+# Bundler / framework caches
+.next/
+.svelte-kit/
+.astro/
+.turbo/
+.vite/
+.parcel-cache/
+# Test coverage
+*.lcov
+# Env / secrets
+# SvelteKit framework overlay
+.vercel/
+.netlify/
+.output/
