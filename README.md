@@ -45,7 +45,9 @@ pnpm exec biome check .
 
 SvelteKit 2 / Svelte 5 (runes) / TypeScript / Vite 8 · `@modelcontextprotocol/sdk`
 (stdio client) · Biome + svelte-check · vitest. No UI framework, no chart library,
-no ORM — the backend's semantic layer is the data model.
+no ORM — the backend's semantic layer is the data model. Styling is one vendored
+design-token sheet (`src/app.css`: paper/ink palette, Fraunces + Inter + JetBrains
+Mono), plain CSS.
 
 ## Limits
 
@@ -56,6 +58,7 @@ no ORM — the backend's semantic layer is the data model.
 - One chart shape (bars). Multi-metric queries are supported by the API route but the
   form submits one metric at a time.
 - MetricFlow's `--where` filters are not exposed (the backend omits them by design).
+- Web fonts load from Google Fonts; offline, the system fallback stacks render instead.
 
 ## Development
 

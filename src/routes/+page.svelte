@@ -94,6 +94,7 @@ function fmt(value: string): string {
 </svelte:head>
 
 <main>
+	<p class="eyebrow">^ governed metrics</p>
 	<h1>KPI console</h1>
 	<p class="sub">
 		Governed metrics from a dbt + MetricFlow warehouse, served over MCP. The console holds no
@@ -158,7 +159,7 @@ function fmt(value: string): string {
 				aria-label="bar chart of {selected}"
 			>
 				{#each bars as bar (bar.x)}
-					<rect x={bar.x} y={bar.y} width={bar.width} height={bar.height}>
+					<rect x={bar.x} y={bar.y} width={bar.width} height={bar.height} rx="2">
 						<title>{bar.label}: {bar.value}</title>
 					</rect>
 					{#if bars.length <= 16}
@@ -187,48 +188,84 @@ function fmt(value: string): string {
 
 <style>
 	main {
-		max-width: 64rem;
+		max-width: 1120px;
 		margin: 0 auto;
-		padding: 1.5rem;
-		font-family: system-ui, sans-serif;
-		color: #1a2330;
+		padding: var(--s-6) var(--s-5) var(--s-7);
+	}
+	.eyebrow {
+		font-size: 11px;
+		font-weight: 500;
+		letter-spacing: var(--trk-label);
+		text-transform: uppercase;
+		color: var(--terracotta-deep);
+		margin: 0 0 var(--s-1);
 	}
 	h1 {
-		margin-bottom: 0.25rem;
+		font-family: var(--font-serif);
+		font-weight: 400;
+		font-size: var(--t-h1);
+		line-height: var(--lh-heading);
+		letter-spacing: var(--trk-heading);
+		font-variation-settings: 'opsz' 100, 'SOFT' 30;
+		margin: 0 0 var(--s-1);
 	}
 	.sub {
-		color: #51607a;
-		margin-top: 0;
+		color: var(--ink-3);
+		font-size: var(--t-small);
+		max-width: 44rem;
+		margin: 0 0 var(--s-5);
 	}
 	.controls {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.75rem;
+		gap: var(--s-3);
 		align-items: end;
-		padding: 0.75rem;
-		background: #f2f5f9;
-		border-radius: 8px;
+		padding: var(--s-4);
+		background: var(--paper-2);
+		border: 1px solid var(--hairline);
+		border-radius: var(--r-lg);
 	}
 	label {
 		display: flex;
 		flex-direction: column;
-		font-size: 0.8rem;
-		gap: 0.25rem;
+		gap: var(--s-1);
+		font-size: 11px;
+		font-weight: 500;
+		letter-spacing: var(--trk-label);
+		text-transform: uppercase;
+		color: var(--ink-3);
 	}
 	select,
 	input {
-		padding: 0.35rem;
-		border: 1px solid #c4cedd;
-		border-radius: 4px;
-		background: #fff;
+		font-family: var(--font-sans);
+		font-size: var(--t-small);
+		color: var(--ink);
+		padding: var(--s-2) var(--s-3);
+		border: 1px solid var(--rule);
+		border-radius: var(--r-md);
+		background: var(--paper-inset);
 	}
 	button {
-		padding: 0.45rem 1.1rem;
+		font-family: var(--font-sans);
+		font-size: var(--t-small);
+		font-weight: 500;
+		padding: var(--s-2) var(--s-5);
 		border: none;
-		border-radius: 4px;
-		background: #1f5eff;
-		color: #fff;
+		border-radius: var(--r-md);
+		background: var(--terracotta);
+		color: var(--paper-inset);
+		box-shadow: var(--inset);
 		cursor: pointer;
+		transition:
+			background var(--dur-fast) var(--ease),
+			transform var(--dur-fast) var(--ease);
+	}
+	button:hover:not(:disabled) {
+		background: var(--terracotta-deep);
+	}
+	button:active:not(:disabled) {
+		background: var(--terracotta-deep);
+		transform: translateY(1px);
 	}
 	button:disabled {
 		opacity: 0.5;
@@ -236,58 +273,83 @@ function fmt(value: string): string {
 	}
 	button.ghost {
 		background: transparent;
-		color: #1f5eff;
-		border: 1px solid #1f5eff;
+		color: var(--ink-2);
+		border: 1px solid var(--rule);
+		box-shadow: none;
+	}
+	button.ghost:hover:not(:disabled) {
+		background: var(--paper-2);
+		border-color: var(--rule-strong);
 	}
 	.description {
-		font-size: 0.9rem;
-		color: #51607a;
+		font-size: var(--t-small);
+		color: var(--ink-3);
 	}
 	.error {
-		color: #b3261e;
-		background: #fdeeee;
-		padding: 0.5rem 0.75rem;
-		border-radius: 4px;
+		color: var(--danger);
+		background: var(--terracotta-wash);
+		border: 1px solid var(--hairline);
+		padding: var(--s-2) var(--s-3);
+		border-radius: var(--r-md);
 	}
 	.lineage {
-		font-size: 0.9rem;
-		background: #f7f4ec;
-		padding: 0.5rem 0.75rem;
-		border-radius: 8px;
+		font-size: var(--t-small);
+		background: var(--paper-3);
+		border: 1px solid var(--hairline);
+		padding: var(--s-3) var(--s-4);
+		border-radius: var(--r-lg);
 	}
 	.lineage h2 {
-		font-size: 0.95rem;
-		margin: 0 0 0.25rem;
+		font-family: var(--font-sans);
+		font-size: var(--t-body);
+		font-weight: 600;
+		margin: 0 0 var(--s-1);
 	}
 	svg {
 		width: 100%;
 		height: auto;
-		margin-top: 1rem;
+		margin-top: var(--s-5);
 	}
 	rect {
-		fill: #1f5eff;
+		fill: var(--terracotta);
+		transition: fill var(--dur-fast) var(--ease);
+	}
+	rect:hover {
+		fill: var(--terracotta-deep);
 	}
 	text {
+		font-family: var(--font-mono);
 		font-size: 11px;
-		fill: #51607a;
+		letter-spacing: var(--trk-mono);
+		fill: var(--ink-3);
 	}
 	table {
 		border-collapse: collapse;
-		margin-top: 1rem;
+		margin-top: var(--s-5);
 		width: 100%;
-		font-size: 0.85rem;
 	}
 	th,
 	td {
-		border: 1px solid #dbe2ec;
-		padding: 0.35rem 0.6rem;
+		padding: var(--s-2) var(--s-3);
 		text-align: right;
+		border-bottom: 1px solid var(--hairline);
 	}
 	th:first-child,
 	td:first-child {
 		text-align: left;
 	}
 	th {
-		background: #f2f5f9;
+		font-size: 11px;
+		font-weight: 500;
+		letter-spacing: var(--trk-label);
+		text-transform: uppercase;
+		color: var(--ink-3);
+		border-bottom: 1px solid var(--rule);
+	}
+	td {
+		font-family: var(--font-mono);
+		font-size: var(--t-mono);
+		letter-spacing: var(--trk-mono);
+		color: var(--ink-2);
 	}
 </style>
