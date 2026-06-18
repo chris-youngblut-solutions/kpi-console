@@ -1,6 +1,6 @@
 # kpi-console
 
-A SvelteKit console that is an MCP client of the [dbt-semantic-mcp](https://github.com/in-loop/dbt-semantic-mcp) warehouse — catalog, query builder, SVG chart, and lineage, where every number comes from the backend's single-sourced semantic layer (dbt + MetricFlow over MCP).
+A SvelteKit console that is an MCP client of the [dbt-semantic-mcp](https://github.com/chris-youngblut-solutions/dbt-semantic-mcp) warehouse — catalog, query builder, SVG chart, and lineage, where every number comes from the backend's single-sourced semantic layer (dbt + MetricFlow over MCP).
 
 ![demo: catalog, quarterly revenue chart, region split, lineage](docs/demo.gif)
 
@@ -20,10 +20,10 @@ Requires Node 22+, [pnpm](https://pnpm.io/), [uv](https://docs.astral.sh/uv/), a
 checkout of dbt-semantic-mcp (0.1.0; brings its own Python pins) with a built warehouse:
 
 ```sh
-git clone https://github.com/in-loop/dbt-semantic-mcp
+git clone https://github.com/chris-youngblut-solutions/dbt-semantic-mcp
 (cd dbt-semantic-mcp && uv sync && cd warehouse && uv run dbt build)
 
-git clone https://github.com/in-loop/kpi-console && cd kpi-console
+git clone https://github.com/chris-youngblut-solutions/kpi-console && cd kpi-console
 pnpm install
 DBT_SEMANTIC_MCP_DIR=../dbt-semantic-mcp pnpm dev
 ```
