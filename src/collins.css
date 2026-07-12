@@ -1,0 +1,250 @@
+/* vendored from design-packs@c0680c3 packs/collins/collins.css
+   sha256:8c9e7a07efb561c4de2cb348372e27efb10b2eb8a01342020dc9344d965ea957
+   DO NOT EDIT. Change the pack upstream and re-run `just vendor`.
+   `just vendor-check` fails if these bytes drift from the recorded hash. */
+/* ============================================================================
+   COLLINS — inkspec design pack · token contract v1
+   ----------------------------------------------------------------------------
+   One CSS file. Swap it, every inkspec reskins. No @import, no @font-face,
+   no remote url() — CSP-clean, offline, single-artifact safe.
+
+   Drawn from a 1972 Collins Radio 8837A terminal:
+     · a powdercoat SURROUND on a light->dark Stone ramp
+     · fixed MATERIALS (brushed aluminium, copper, walnut, oxide red) that
+       never retint across modes — a metal plate is a metal plate
+     · a PHOSPHOR screen layer for live/inset readouts
+     · semantic FILLS split from AA-safe semantic INKS
+       (an LED colour is not a text colour)
+
+   MODE: follows OS preference, FAILS TO LIGHT. An explicit [data-mode]
+   attribute on <html> overrides the OS ("day" | "night").
+   ============================================================================ */
+
+/* ---- DAY (base · Lt Stone) ------------------------------------------------ */
+:root, [data-mode="day"] {
+  /* surround — powdercoat, the Stone ramp's light end */
+  --paper:#DEDCD5; --paper-2:#D2CFC7; --paper-3:#C4C1B8; --inset:#E8E6DF;
+  --card:linear-gradient(180deg,#E8E6DF 0%,#DEDCD5 60%,#D2CFC7 100%);
+  /* ink — text on the surround, all AA-safe on --paper */
+  --ink:#24221C; --ink-2:#4C4940; --ink-3:#5B5951; --ink-disabled:#8E8B81;
+  /* hairlines */
+  --rule:rgba(40,38,31,.12); --rule-2:rgba(40,38,31,.20); --rule-3:rgba(40,38,31,.30);
+
+  /* semantic FILLS — LEDs, dots, bars, chip grounds. Vivid. NEVER for text. */
+  --fill-ok:#7C9578; --fill-warn:#BBA167; --fill-danger:#B5583F; --fill-info:#6B8394;
+  --fill-accent:#8E4E45;
+  /* semantic INKS — the SAME semantics as text. AA-safe on --paper & --paper-2. */
+  --ink-ok:#465F43; --ink-warn:#6F551B; --ink-danger:#8E3D2C; --ink-info:#3F5A6B;
+  --ink-accent:#743E37;
+  --on-danger:var(--on-fill-light);   /* day: white on #B5583F = 4.74 */
+  /* soft washes — callout / row grounds */
+  --ok-soft:rgba(124,149,120,.16); --warn-soft:rgba(187,161,103,.18);
+  --danger-soft:rgba(181,88,63,.14); --info-soft:rgba(107,131,148,.15);
+  --accent-soft:rgba(142,78,69,.14); --accent-wash:rgba(142,78,69,.06);
+}
+
+/* ---- NIGHT (Basalt) — applied by OS pref (unless [data-mode="day"]) or explicitly */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-mode]) {
+    --paper:#201F1C; --paper-2:#2A2926; --paper-3:#343330; --inset:#1A1917;
+    --card:linear-gradient(180deg,#2A2926 0%,#201F1C 60%,#1A1917 100%);
+    --ink:#E9E6DD; --ink-2:#B4B1A8; --ink-3:#938F85; --ink-disabled:#6E6A61;
+    --rule:rgba(255,255,255,.08); --rule-2:rgba(255,255,255,.15); --rule-3:rgba(255,255,255,.24);
+    --fill-ok:#8BAA84; --fill-warn:#CBB074; --fill-danger:#C56A50; --fill-info:#7E97A8;
+    --fill-accent:#A85D52;
+    --ink-ok:#9CC090; --ink-warn:#DBC07E; --ink-danger:#E79079; --ink-info:#A9C2D2;
+    --ink-accent:#D89E92;
+    --on-danger:var(--on-fill-dark);   /* night: dark on #C56A50 = 5.24 */
+    --ok-soft:rgba(139,170,132,.18); --warn-soft:rgba(203,176,116,.18);
+    --danger-soft:rgba(197,106,80,.18); --info-soft:rgba(126,151,168,.18);
+    --accent-soft:rgba(168,93,82,.20); --accent-wash:rgba(168,93,82,.08);
+  }
+}
+[data-mode="night"] {
+  --paper:#201F1C; --paper-2:#2A2926; --paper-3:#343330; --inset:#1A1917;
+  --card:linear-gradient(180deg,#2A2926 0%,#201F1C 60%,#1A1917 100%);
+  --ink:#E9E6DD; --ink-2:#B4B1A8; --ink-3:#938F85; --ink-disabled:#6E6A61;
+  --rule:rgba(255,255,255,.08); --rule-2:rgba(255,255,255,.15); --rule-3:rgba(255,255,255,.24);
+  --fill-ok:#8BAA84; --fill-warn:#CBB074; --fill-danger:#C56A50; --fill-info:#7E97A8;
+  --fill-accent:#A85D52;
+  --ink-ok:#9CC090; --ink-warn:#DBC07E; --ink-danger:#E79079; --ink-info:#A9C2D2;
+  --ink-accent:#D89E92;
+  --on-danger:var(--on-fill-dark);   /* night: dark on #C56A50 = 5.24 */
+  --ok-soft:rgba(139,170,132,.18); --warn-soft:rgba(203,176,116,.18);
+  --danger-soft:rgba(197,106,80,.18); --info-soft:rgba(126,151,168,.18);
+  --accent-soft:rgba(168,93,82,.20); --accent-wash:rgba(168,93,82,.08);
+}
+
+/* ---- FIXED MATERIALS — identical in day and night, declared once ---------- */
+:root {
+  --alu:#D2CEC5; --alu-hi:#EDEAE3; --alu-lo:#B4AFA4; --alu-line:#A39E92;
+  --alu-ink:#39342b; --alu-ink-2:#5a544a; --alu-ink-3:#7d786c;  /* engraving tones */
+  --copper:#AE8A74; --copper-hi:#D6B7A4; --copper-lo:#8B6752; --copper-deep:#6F5240;
+  --walnut:#49382B; --walnut-hi:#5C4636; --walnut-lo:#352820;
+  --oxide:#8E4E45; --oxide-deep:#743E37; --oxide-soft:rgba(142,78,69,.14);
+
+  /* ON-FILL foreground — text/icons that sit ON a --fill-* material ground.
+     mode-invariant except --on-danger (declared per-mode; polarity flips). */
+  --on-fill-dark:#0B0A06; --on-fill-light:#FFFFFF;
+  --on-ok:var(--on-fill-dark); --on-warn:var(--on-fill-dark); --on-info:var(--on-fill-dark);
+  --on-accent:var(--on-fill-light);
+  --on-copper:var(--on-fill-dark); --on-copper-lo:var(--on-fill-light); --on-oxide:var(--on-fill-light);
+
+  /* ELEVATION / SCRIM — tokenized shadows (was raw rgba across widgets) */
+  --shadow-1:0 1px 4px rgba(20,16,10,.14);
+  --shadow-2:0 6px 20px rgba(20,16,10,.22);
+  --shadow-3:0 24px 60px rgba(20,16,10,.42);
+  --scrim:rgba(20,16,10,.5);
+
+  /* PHOSPHOR screen layer — a screen is a screen in any mode */
+  --scr:#16150F; --scr-2:#0B0A06; --scr-line:#2A281E;
+  --p:#EAE3D0;      --p-dim:#8F887A;   --p-glow:rgba(234,227,208,.40);  /* ivory (default) */
+  --p-green:#8FB79A; --p-green-glow:rgba(143,183,154,.45);
+  --p-amber:#D6B96E; --p-amber-glow:rgba(214,185,110,.45);
+  --p-red:#D8776A;   --p-red-glow:rgba(216,119,106,.45);
+
+  /* TYPE — --font-* is the settable contract a foreign pack overrides.
+     --serif/--sans/--mono remain as aliases so every call site resolves. */
+  --font-serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+  --font-sans:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --font-mono:ui-monospace,'SF Mono','Cascadia Code',Menlo,Consolas,monospace;
+  --serif:var(--font-serif); --sans:var(--font-sans); --mono:var(--font-mono);
+
+  /* SPACING — 4-unit / 8px module */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px;
+  /* RADIUS */
+  --r1:4px; --r2:8px; --r3:12px; --r4:16px;
+  /* MOTION */
+  --ease:cubic-bezier(.2,.6,.2,1); --t:180ms; --t-fast:110ms;
+}
+
+/* ============================================================================
+   CONTRACT NOTES (read before authoring)
+   ----------------------------------------------------------------------------
+   1. TEXT colour comes only from  --ink*  (incl. --ink-ok/-warn/-danger/-info
+      /-accent).  Never set text to a --fill-* or a raw material hex.
+   2. FILLS (--fill-*) are for lights: LED dots, status bars, chip grounds,
+      sparkline strokes. They are not contrast-guaranteed for text.
+   3. MATERIALS (--alu / --copper / --walnut / --oxide) never change by mode.
+      Copper is the single primary-action accent — one per view. Oxide is the
+      identity/critical mark — badge tab + critical only, never decoration.
+   4. PHOSPHOR (--scr + --p*) is for inset "screens": consoles, live readouts,
+      terminals. Default ink is ivory (--p); use green/amber/red for state.
+   5. MODE: never hard-code light/dark. Read the tokens; they resolve per mode.
+      Mode fails to light and follows OS pref; [data-mode] on <html> overrides.
+   6. Do not invent hexes in an artifact. If a value is missing here, it belongs
+      in the pack, not the inkspec.
+   7. ON-FILL: text/icons on a --fill-* or material ground use --on-* (never an
+      --ink-*). --on-danger flips polarity by mode; the rest are invariant.
+   8. --paper-3 carries --ink and --ink-2 ONLY (both AA on it: --ink-2 = 5.00:1).
+      It is otherwise a structural ground (rails, wells, dividers, tracks); the
+      lighter ink tiers (--ink-3, --ink-disabled) are NOT legible on it.
+   9. --ink-disabled (~2.5:1) is the inert tier — watermarks, spacers, knob
+      fills, inert glyphs ONLY. Never text that is read. (Cannot be raised: AA
+      on --paper/--paper-2 collapses it into --ink-3.)
+   10. MATERIALS (alu/copper/walnut/oxide) + PHOSPHOR are OPTIONAL identity
+       extensions. A foreign pack may drop them; the surround + ink + fill/ink
+       split + --font-* is the required contract. In the widget layer every
+       identity token carries a contract fallback — var(--scr, var(--paper-3)),
+       var(--p, var(--ink)), var(--oxide, var(--fill-danger)) — so a pack
+       without them degrades instead of painting dead vars.
+   11. --sys-accent is a SHELL BRIDGE (focus rings, selected/active rows) that
+       borrows the OS accent (GNOME AccentColor, copper fallback). It is NEVER
+       the primary action — that stays --copper, one per view.
+   ============================================================================ */
+
+/* ============================================================================
+   PLATFORM · GNOME / Wayland (Tauri / Fedora wrapper)               [B]
+   ----------------------------------------------------------------------------
+   Collins already speaks GNOME's core dialect: it follows prefers-color-scheme
+   (libadwaita light/dark) and fails to light. To sit natively in the shell:
+
+   · ACCENT BRIDGE — GTK4/Adwaita 1.6+ exposes the user's accent as the CSS
+     system color `AccentColor`. Collins keeps its OWN identity (copper primary,
+     oxide mark) by default; opt in to the desktop accent only for chrome that
+     should match the shell (focus rings, selected rows) via --sys-accent.
+   · FONTS — the --sans stack below already lists the GNOME faces first so a
+     wrapped inkspec matches Adwaita/Cantarell without shipping a font.
+   · CSD — draw the headerbar with .win/.headerbar (see widgets §24). Let the
+     compositor own resize/snap; don't fake shadows the compositor provides.
+   · HiDPI — everything is rem/%, no px-locked layouts → fractional scaling safe.
+   ============================================================================ */
+/* fallback declared FIRST so the @supports override can win on equal specificity */
+:root { --sys-accent: var(--copper); }
+@supports (color: AccentColor) {
+  :root { --sys-accent: AccentColor; }        /* GNOME accent wins WHEN present */
+}
+/* Adwaita/Cantarell first so a Tauri/GNOME window matches the shell font */
+:root {
+  --font-sans: 'Adwaita Sans','Cantarell',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+}
+
+/* ============================================================================
+   PLATFORM · NixOS (reproducible desktop / Tauri derivation)        [B]
+   ----------------------------------------------------------------------------
+   The pack is already maximal-fit for Nix: static CSS/JS/HTML, no build step,
+   no npm/CDN, no @import, no remote url(), no runtime network. A derivation is
+   a plain copyToStore of the artifact.
+   · FONTS — Nix may not have Adwaita Sans / Cantarell in fontconfig. The --sans
+     stack degrades to system-ui → generic sans, so text never breaks; if you
+     want the GNOME face guaranteed, add `cantarell-fonts` to the derivation's
+     fontconfig, don't ship or @font-face it into the artifact.
+   · WEBVIEW — Tauri on NixOS uses the system webkit2gtk; everything here is
+     baseline CSS (no bleeding-edge APIs beyond @supports-guarded AccentColor).
+   · REPRODUCIBLE — because the artifact hashes deterministically (no fetch, no
+     timestamp, no external state), the same input always yields the same store
+     path. Keep it that way: never fetch at build or runtime.
+
+   PLATFORM · GrapheneOS (hardened Android · Vanadium WebView · TOUCH)  [B]
+   ----------------------------------------------------------------------------
+   The one non-desktop target. Vanadium is a hardened Chromium: no eval, strict
+   CSP, no remote — all of which Collins already satisfies. What CHANGES is that
+   it is a phone under a finger, so:
+   · VIEWPORT — the artifact MUST carry
+       <meta name="viewport" content="width=device-width, initial-scale=1,
+             viewport-fit=cover">
+   · TOUCH TARGETS — coarse-pointer bumps interactive elements to >=44px (below).
+   · HOVER — never gate meaning on :hover ([data-tip] tooltips are supplementary,
+     never the only source of a label). Touch has no hover.
+   · SAFE AREA — --safe-* expose the notch/gesture insets; pad fixed chrome with
+     them (toasts, headerbars, bottom bars).
+   · REFLOW — layouts are rem/%/grid with mobile breakpoints already in the
+     widget layer; keep new widgets fluid, never px-locked width.
+
+   PLATFORM · Hybrid handheld (OneXPlayer X1 Pro / Fedora + touch)     [B]
+   ----------------------------------------------------------------------------
+   A touchscreen device that ALSO has a trackpad / mouse / gamepad. The catch:
+   `(pointer: coarse)` keys off the PRIMARY pointer, so with the trackpad active
+   it reports `fine` and touch bumps would never fire on a touch screen. The
+   touch layer below therefore keys off `any-pointer: coarse` — if touch exists
+   at all, targets are tappable, while a mouse still works precisely. Large HiDPI
+   landscape (rem/% + fractional-scaling safe, GNOME/Wayland already covered).
+   ============================================================================ */
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+/* TOUCH: if touch exists at all (incl. hybrid handhelds w/ a trackpad),
+   guarantee >=44px hit targets & give hover-only UI a focus fallback */
+@media (any-pointer: coarse) {
+  .btn, .tab, .seg button, .pager button, .dstat, .key,
+  .menu .mi, .boxed .row, .split .item, .gn, .qs {
+    min-height: 44px;
+  }
+  .btn, .seg button, .pager button { padding-top: .7rem; padding-bottom: .7rem; }
+  .switch .track { width: 46px; height: 26px; }
+  .switch .track::after { width: 22px; height: 22px; }
+  .switch input:checked + .track::after { left: 21px; }
+  input[type=range].ink { height: 8px; }
+  input[type=range].ink::-webkit-slider-thumb { width: 22px; height: 22px; }
+  /* hover-only tooltip becomes tap-to-reveal via :focus too */
+  [data-tip]:focus::after { content: attr(data-tip); position: absolute; left: 50%;
+    bottom: calc(100% + 6px); transform: translateX(-50%); white-space: nowrap;
+    font-family: var(--mono); font-size: .68rem; padding: .3rem .5rem;
+    border-radius: var(--r1); background: var(--ink); color: var(--paper); z-index: 70; }
+}
+/* fixed chrome respects notch/gesture insets when present */
+.toasts { right: calc(16px + var(--safe-right)); bottom: calc(16px + var(--safe-bottom)); }
+.panel-bar { padding-left: calc(.8rem + var(--safe-left)); padding-right: calc(.8rem + var(--safe-right)); }

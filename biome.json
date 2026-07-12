@@ -19,7 +19,8 @@
       "!**/coverage",
       "!**/.turbo",
       "!**/*.tsbuildinfo",
-      "!**/*.svelte"
+      "!**/*.svelte",
+      "!src/collins.css"
     ]
   },
   "formatter": {
